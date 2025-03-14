@@ -1,0 +1,8 @@
+title: Button
+variants:
+  primary:
+    buttonText: "Primary Button"
+    buttonClass: "button--primary"
+  secondary:
+    buttonText: "Secondary Button"
+    buttonClass: "button--secondary"

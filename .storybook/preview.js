@@ -19,16 +19,20 @@ const preview = {
   },
   decorators: [
     (Story) => {
+      console.log('Decorator running');
+
       useEffect(() => {
+        console.log('useEffect running');
+        const initScript = document.createElement('script');
+        initScript.src = 'uswds-init.min.js';
+        document.head.appendChild(initScript);
+
         const script = document.createElement('script');
         script.src = 'uswds.min.js';
         document.body.appendChild(script);
 
-        const initScript = document.createElement('script');
-        initScript.src = 'uswds-init.min.js';
-        document.body.appendChild(initScript);
-
         return () => {
+          console.log('useEffect cleanup');
           // Cleanup if needed
         };
       }, []);

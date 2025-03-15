@@ -1,10 +1,1 @@
-title: Button
-variants:
-  primary:
-    buttonText: "Primary Button"
-    buttonClass: ""
-    isDemo: true
-  secondary:
-    buttonText: "Secondary Button"
-    buttonClass: "usa-button--accent-cool"
-
+is_demo: true

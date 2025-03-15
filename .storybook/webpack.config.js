@@ -12,6 +12,17 @@ module.exports = ({ config }) => {
   });
 
   config.module.rules.push({
+    test: /\.js$/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env'],
+      },
+    },
+    include: path.resolve(__dirname, '../src'),
+  });
+
+  config.module.rules.push({
     test: /\.scss$/,
     use: [
       'style-loader',

@@ -21,6 +21,7 @@ export const Primary = {
 export const Secondary = {
   ...Default,
   args: {
+    ...data,
     ...secondaryData,
   },
 };

@@ -1,7 +1,7 @@
 /** @type { import('@storybook/html').Preview } */
 
 import '../assets/scss/styles.scss';
-import { useEffect } from '@storybook/client-api';
+import { useEffect } from '@storybook/preview-api';
 
 const preview = {
   parameters: {
@@ -19,21 +19,28 @@ const preview = {
   },
   decorators: [
     (Story) => {
-      console.log('Decorator running');
 
       useEffect(() => {
-        console.log('useEffect running');
         const initScript = document.createElement('script');
         initScript.src = 'uswds-init.min.js';
+        initScript.id = 'uswds-init-script';
         document.head.appendChild(initScript);
-
+        
         const script = document.createElement('script');
         script.src = 'uswds.min.js';
+        script.id = 'uswds-script';
         document.body.appendChild(script);
 
         return () => {
-          console.log('useEffect cleanup');
-          // Cleanup if needed
+          const initScript = document.getElementById('uswds-init-script');
+          if (initScript) {
+            initScript.remove();
+          }
+        
+          const script = document.getElementById('uswds-script');
+          if (script) {
+            script.remove();
+          }
         };
       }, []);
 

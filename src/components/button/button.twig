@@ -1,3 +1,11 @@
-<button class="button {{ buttonClass }}">
+<button class="usa-button test {{ buttonClass }}">
   {{ buttonText }}
 </button>
+
+{% if isDemo %}
+<div class="grid-container usa-section">
+  <div class="usa-prose">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas luctus consequat nisi at dictum. Duis at scelerisque odio. Morbi rutrum, nibh sed rutrum maximus, est velit maximus libero, at accumsan dolor augue quis turpis. Aenean consectetur lobortis dolor mattis tincidunt. Suspendisse pretium, dolor id posuere porta, orci mauris consequat elit, in egestas quam turpis sit amet elit. Suspendisse placerat, lacus at ullamcorper commodo, tortor nulla molestie nunc, eget tincidunt sapien metus tincidunt arcu. Pellentesque facilisis urna ac purus viverra, ac condimentum ante pharetra. Ut diam quam, accumsan non urna sed, vulputate tempor velit. Quisque sit amet porta turpis, nec malesuada purus. Donec at imperdiet dui.</p>
+  </div>
+</div>
+{% endif %}

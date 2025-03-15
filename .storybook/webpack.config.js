@@ -20,10 +20,21 @@ module.exports = ({ config }) => {
         loader: 'sass-loader',
         options: {
           implementation: sass,
+          sassOptions: {
+            loadPaths: [
+              path.resolve(__dirname, '../assets/scss'),
+              path.resolve(
+                __dirname,
+                '../node_modules/@uswds/uswds/packages'
+              ),
+            ],
+            // Hiding mixed declaration warnings for now.
+            // https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+            silenceDeprecations: ['mixed-decls'],
+          },
         },
       },
     ],
-    include: path.resolve(__dirname, '../assets/scss'),
   });
 
   config.module.rules.push({

@@ -2,7 +2,9 @@ title: Button
 variants:
   primary:
     buttonText: "Primary Button"
-    buttonClass: "button--primary"
+    buttonClass: ""
+    isDemo: true
   secondary:
     buttonText: "Secondary Button"
-    buttonClass: "button--secondary"
+    buttonClass: "usa-button--accent-cool"
+

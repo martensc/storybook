@@ -11,6 +11,11 @@ const preview = {
         date: /Date$/i,
       },
     },
+    options: {
+      storySort: {
+        order: ['Elements', 'Components'],
+      },
+    },
   },
   decorators: [
     (Story) => {

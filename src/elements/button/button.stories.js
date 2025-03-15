@@ -3,7 +3,7 @@ import data from './button.yml';
 import secondaryData from './button~secondary.yml';
 
 export default {
-  title: 'Components/Button',
+  title: 'Elements/Button',
 };
 
 const Default = {

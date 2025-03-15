@@ -18,6 +18,7 @@
     "@storybook/addon-links": "^8.6.4",
     "@storybook/addon-webpack5-compiler-swc": "^3.0.0",
     "@storybook/blocks": "^8.6.4",
+    "@storybook/client-api": "^7.6.17",
     "@storybook/html": "^8.6.4",
     "@storybook/html-webpack5": "^8.6.4",
     "@storybook/test": "^8.6.4",

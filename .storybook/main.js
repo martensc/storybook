@@ -1,5 +1,3 @@
-
-
 /** @type { import('@storybook/html-webpack5').StorybookConfig } */
 const config = {
   "stories": ['../src/**/*.stories.js'],
@@ -17,6 +15,7 @@ const config = {
       },
       fastRefresh: false,
     }
-  }
+  },
+  staticDirs: ['../node_modules/@uswds/uswds/dist/js'],
 };
 export default config;

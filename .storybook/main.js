@@ -1,21 +1,35 @@
 /** @type { import('@storybook/html-webpack5').StorybookConfig } */
-const config = {
+
+const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+module.exports = {
   "stories": ['../src/**/*.stories.js'],
-  "addons": [
-    "@storybook/addon-webpack5-compiler-swc",
-    "@storybook/addon-essentials",
-    "@chromatic-com/storybook",
-    "@storybook/addon-interactions"
+  addons: [
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
   ],
-  "framework": {
-    "name": "@storybook/html-webpack5",
-    "options": {
+  staticDirs: ['../public'],
+  framework: {
+    name: "@storybook/html-webpack5",
+    options: {
       builder: {
           useSWC: true,
       },
       fastRefresh: false,
     }
   },
-  staticDirs: ['../node_modules/@uswds/uswds/dist/js'],
+  webpackFinal: async (config) => {
+    config.plugins.push(
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/js'),
+            to: path.resolve(__dirname, '../public/uswds/js'),
+          },
+        ],
+      })
+    );
+    return config;
+  },
 };
-export default config;

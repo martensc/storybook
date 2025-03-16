@@ -1,14 +1,24 @@
-import accordionTwig from './modal.twig';
+import modalTwig from './modal.twig';
 import data from './modal.yml';
-import focedActiondData from './modal~forced-action.yml';
+import forcedActionData from './modal~forced-action.yml';
 import largeData from './modal~large.yml';
+import uswdsModal from '@uswds/uswds/js/usa-modal';
 
 export default {
   title: 'Components/Modal',
 };
 
 const Default = {
-  render: args => accordionTwig(args),
+  render: args => {
+    const html = modalTwig(args);
+
+    // After DOM injection, initialize Modal JS
+    setTimeout(() => {
+      uswdsModal.on(document.body);
+    }, 0);
+
+    return html;
+  },
   args: { ...data },
 };
 
@@ -22,7 +32,7 @@ export const Modal = {
 export const ForcedAction = {
   ...Default,
   args: {
-    ...focedActiondData,
+    ...forcedActionData,
   },
 };
 

@@ -15,18 +15,6 @@ module.exports = ({ config }) => {
     ],
   });
 
-  // Babel Loader: Transpile modern JavaScript (ES6+) to ensure browser compatibility
-  config.module.rules.push({
-    test: /\.js$/,
-    use: {
-      loader: 'babel-loader',
-      options: {
-        presets: ['@babel/preset-env'], // Use preset-env for modern JS syntax
-      },
-    },
-    include: path.resolve(__dirname, '../src'), // Only transpile source files
-  });
-
   // SCSS Loader: Compile SCSS (including USWDS + custom styles) to CSS
   config.module.rules.push({
     test: /\.scss$/,

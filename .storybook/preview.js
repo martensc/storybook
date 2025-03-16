@@ -2,7 +2,7 @@
 
 import '../src/scss/styles.scss';
 
-// Global decorator for injecting USWDS init JS (non-hashed filename)
+// Global decorator for injecting USWDS init JS
 export const decorators = [
   (Story) => {
     if (typeof window !== 'undefined') {

@@ -3,6 +3,7 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const StylelintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
   stories: ['../src/**/*.stories.js'],
@@ -47,6 +48,16 @@ module.exports = {
       new WebpackManifestPlugin({
         fileName: 'asset-manifest.json',
         publicPath: '', // Keep relative paths
+      })
+    );
+
+    // Add Stylelint Webpack Plugin
+    config.plugins.push(
+      new StylelintPlugin({
+        files: 'src/**/*.scss', // Adjust path as needed
+        emitWarning: true, // Show warnings during dev
+        failOnError: false, // Prevent blocking dev server
+        fix: false, // Optional: Enable auto-fix if desired
       })
     );
 

@@ -3,6 +3,7 @@ import data from './accordion.yml';
 import borderedData from './accordion~bordered.yml';
 import './accordion.js';
 import uswdsAccordion from '@uswds/uswds/js/usa-accordion';
+import { initUswdsComponent } from '../../utils/uswds-init';
 
 export default {
   title: 'Components/Accordion',
@@ -12,8 +13,7 @@ const Default = {
   render: args => accordionTwig(args),
   args: { ...data },
   play: async () => {
-    // Initialize Accordion behavior after render
-    uswdsAccordion.on(document.body);
+    initUswdsComponent(uswdsAccordion);
   },
 };
 

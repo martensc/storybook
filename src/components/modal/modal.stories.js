@@ -3,6 +3,7 @@ import data from './modal.yml';
 import forcedActionData from './modal~forced-action.yml';
 import largeData from './modal~large.yml';
 import uswdsModal from '@uswds/uswds/js/usa-modal';
+import { initUswdsComponent } from '../../utils/uswds-init';
 
 export default {
   title: 'Components/Modal',
@@ -12,8 +13,7 @@ const Default = {
   render: args => modalTwig(args),
   args: { ...data },
   play: async () => {
-    // Initialize Modal behavior after render
-    uswdsModal.on(document.body);
+    initUswdsComponent(uswdsModal);
   },
 };
 

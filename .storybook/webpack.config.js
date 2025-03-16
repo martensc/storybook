@@ -2,32 +2,32 @@ const path = require('path');
 const sass = require('sass-embedded');
 
 module.exports = ({ config }) => {
-  // Twig Loader
+  // Twig Loader: Handle `.twig` template files using twig-loader
   config.module.rules.push({
     test: /\.twig$/,
     use: [
       {
         loader: 'twig-loader',
         options: {
-          // No options needed unless adding custom filters/functions
+          // No specific options required unless adding custom filters/functions
         },
       },
     ],
   });
 
-  // Babel Loader for JS
+  // Babel Loader: Transpile modern JavaScript (ES6+) to ensure browser compatibility
   config.module.rules.push({
     test: /\.js$/,
     use: {
       loader: 'babel-loader',
       options: {
-        presets: ['@babel/preset-env'],
+        presets: ['@babel/preset-env'], // Use preset-env for modern JS syntax
       },
     },
-    include: path.resolve(__dirname, '../src'),
+    include: path.resolve(__dirname, '../src'), // Only transpile source files
   });
 
-  // SCSS Loader: USWDS + Custom SCSS
+  // SCSS Loader: Compile SCSS (including USWDS + custom styles) to CSS
   config.module.rules.push({
     test: /\.scss$/,
     include: [
@@ -35,37 +35,38 @@ module.exports = ({ config }) => {
       path.resolve(__dirname, '../src/scss'),
     ],
     use: [
-      'style-loader',
+      'style-loader', // Inject CSS into DOM
       {
         loader: 'css-loader',
         options: {
-          url: false, // Prevent font/image URL resolution
+          url: false, // Prevent resolving image/font URLs; handled manually
         },
       },
       {
         loader: 'sass-loader',
         options: {
-          implementation: sass,
+          implementation: sass, // Use Dart Sass embedded version
           sassOptions: {
             loadPaths: [
+              // Allow SCSS imports from USWDS and project-specific folders
               path.resolve(__dirname, '../node_modules/@uswds/uswds/packages'),
               path.resolve(__dirname, '../src/scss'),
             ],
-            silenceDeprecations: ['mixed-decls'], // Suppress USWDS warnings
+            silenceDeprecations: ['mixed-decls'], // Suppress mixed declarations warnings (USWDS-specific)
           },
         },
       },
     ],
   });
 
-  // YAML Loader
+  // YAML Loader: Enable importing `.yml` files as JavaScript objects
   config.module.rules.push({
     test: /\.yml$/,
     use: ['yaml-loader'],
-    include: path.resolve(__dirname, '../'),
+    include: path.resolve(__dirname, '../'), // Apply loader to all project YML files
   });
 
-  // Twig extension resolution
+  // File Extension Resolution: Automatically resolve `.twig` imports without specifying extension
   config.resolve.extensions.push('.twig');
 
   return config;

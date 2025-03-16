@@ -1,16 +1,18 @@
 /** @type { import('@storybook/html').Preview } */
 
+// Import main SCSS styles for Storybook
 import '../src/scss/styles.scss';
 
+// Dynamically load hashed USWDS init JS script from manifest
 if (typeof window !== 'undefined') {
-  // Fetch manifest and inject correct hashed JS
   fetch('asset-manifest.json')
     .then(response => response.json())
     .then(manifest => {
-      // Find the hashed JS filename
+      // Locate the hashed USWDS init JS file from manifest entries
       const jsFile = Object.values(manifest).find(path => path.includes('uswds-init') && path.endsWith('.js'));
 
       if (jsFile) {
+        // Prevent duplicate injection of the init script
         const existingScript = document.querySelector('script[data-uswds-init]');
         if (!existingScript) {
           const initScript = document.createElement('script');
@@ -23,22 +25,24 @@ if (typeof window !== 'undefined') {
     });
 }
 
+// Configure Storybook preview parameters
 const preview = {
   parameters: {
+    // Define how Storybook controls behave (color/date matchers)
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
     },
+    // Define Story sorting order in UI
     options: {
       storySort: {
         order: ['Elements', 'Components'],
       },
     },
-    // Add accessibility rules
+    // Enable and configure accessibility checks (a11y addon)
     a11y: {
-      // Disable or fine-tune specific rules if needed
       config: {},
       options: {
         checks: { 'color-contrast': { options: { noScroll: true } } },

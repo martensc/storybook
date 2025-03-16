@@ -1,10 +1,10 @@
 @use 'uswds-core' with (
-  $theme-image-path: '../../public/uswds/img',
+  $theme-image-path: '/uswds/img',
   $theme-show-compile-warnings: false,
   $theme-show-notifications: false,
   $theme-global-content-styles: true,
   // Typography
-  $theme-font-path: '../../public/uswds/fonts',
+  $theme-font-path: '/uswds/fonts',
   $theme-font-role-heading: 'sans',
   $theme-type-scale-md: 7,
   $theme-global-paragraph-styles: false,

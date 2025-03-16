@@ -2,6 +2,7 @@ const path = require('path');
 const sass = require('sass-embedded');
 
 module.exports = ({ config }) => {
+  // Twig Loader
   config.module.rules.push({
     test: /\.twig$/,
     use: [
@@ -11,6 +12,7 @@ module.exports = ({ config }) => {
     ],
   });
 
+  // Babel Loader for JS
   config.module.rules.push({
     test: /\.js$/,
     use: {
@@ -22,11 +24,21 @@ module.exports = ({ config }) => {
     include: path.resolve(__dirname, '../src'),
   });
 
+  // SCSS Loader: USWDS + Custom SCSS
   config.module.rules.push({
     test: /\.scss$/,
+    include: [
+      path.resolve(__dirname, '../assets/scss'),
+      path.resolve(__dirname, '../src'),
+    ],
     use: [
       'style-loader',
-      'css-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          url: false, // ✅ Prevent font/image URL resolution
+        },
+      },
       {
         loader: 'sass-loader',
         options: {
@@ -34,26 +46,23 @@ module.exports = ({ config }) => {
           sassOptions: {
             loadPaths: [
               path.resolve(__dirname, '../assets/scss'),
-              path.resolve(
-                __dirname,
-                '../node_modules/@uswds/uswds/packages'
-              ),
+              path.resolve(__dirname, '../node_modules/@uswds/uswds/packages'),
             ],
-            // Hiding mixed declaration warnings for now.
-            // https://sass-lang.com/documentation/breaking-changes/mixed-decls/
-            silenceDeprecations: ['mixed-decls'],
+            silenceDeprecations: ['mixed-decls'], // ✅ Suppress USWDS warnings
           },
         },
       },
     ],
   });
 
+  // YAML Loader
   config.module.rules.push({
     test: /\.yml$/,
     use: ['yaml-loader'],
     include: path.resolve(__dirname, '../'),
   });
 
+  // Twig extension resolution
   config.resolve.extensions.push('.twig');
 
   return config;

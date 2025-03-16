@@ -1,5 +1,6 @@
 /** @type { import('@storybook/html').Preview } */
 
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import '../src/scss/styles.scss';
 
 // Global decorator for injecting USWDS init JS
@@ -23,6 +24,10 @@ export const decorators = [
 
 const preview = {
   parameters: {
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'responsive',
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -33,12 +38,18 @@ const preview = {
       storySort: {
         order: ['Elements', 'Components'],
       },
+      toolbar: { 
+        show: true
+      },
     },
     a11y: {
       config: {},
       options: {
         checks: { 'color-contrast': { options: { noScroll: true } } },
       },
+    },
+    performance: {
+      disable: false,
     },
   },
 };

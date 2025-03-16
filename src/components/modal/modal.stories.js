@@ -9,36 +9,25 @@ export default {
 };
 
 const Default = {
-  render: args => {
-    const html = modalTwig(args);
-
-    // After DOM injection, initialize Modal JS
-    setTimeout(() => {
-      uswdsModal.on(document.body);
-    }, 0);
-
-    return html;
-  },
+  render: args => modalTwig(args),
   args: { ...data },
+  play: async () => {
+    // Initialize Modal behavior after render
+    uswdsModal.on(document.body);
+  },
 };
 
 export const Modal = {
   ...Default,
-  args: {
-    ...data,
-  },
-};
-
-export const ForcedAction = {
-  ...Default,
-  args: {
-    ...forcedActionData,
-  },
+  args: { ...data },
 };
 
 export const Large = {
   ...Default,
-  args: {
-    ...largeData,
-  },
+  args: { ...largeData },
+};
+
+export const ForcedAction = {
+  ...Default,
+  args: { ...forcedActionData },
 };

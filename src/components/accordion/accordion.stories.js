@@ -9,29 +9,20 @@ export default {
 };
 
 const Default = {
-  render: args => {
-    const html = accordionTwig(args);
-
-    // After DOM render, initialize Accordion behavior
-    setTimeout(() => {
-      uswdsAccordion.on(document.body);
-    }, 0);
-
-    return html;
-  },
+  render: args => accordionTwig(args),
   args: { ...data },
+  play: async () => {
+    // Initialize Accordion behavior after render
+    uswdsAccordion.on(document.body);
+  },
 };
 
 export const Accordion = {
   ...Default,
-  args: {
-    ...data,
-  },
+  args: { ...data },
 };
 
 export const Bordered = {
   ...Default,
-  args: {
-    ...borderedData,
-  },
+  args: { ...borderedData },
 };

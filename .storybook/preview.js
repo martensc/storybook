@@ -1,6 +1,6 @@
 /** @type { import('@storybook/html').Preview } */
 
-import '../assets/scss/styles.scss';
+import '../src/scss/styles.scss';
 
 // Dynamically inject uswds-init.min.js served directly from node_modules
 if (typeof window !== 'undefined') {

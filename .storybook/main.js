@@ -23,7 +23,7 @@ module.exports = {
       builder: {
         useSWC: true,
         options: {
-          publicPath: '/storybook/',
+          publicPath: '/storybook/', // Files are served from /storybook/ directory
         },
       },
       fastRefresh: false,

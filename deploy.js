@@ -5,9 +5,9 @@ ghpages.publish(
   path.join(__dirname, 'storybook-static'),
   {
     branch: 'gh-pages',
-    dest: 'storybook',
+    dest: 'storybook', // deploy to /storybook/ subfolder
     add: true, // preserve root files/folders
-    message: 'Deploy Storybook to test subfolder',
+    message: 'Deploy Storybook',
   },
   function (err) {
     if (err) {

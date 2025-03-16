@@ -19,7 +19,12 @@ module.exports = {
   framework: {
     name: "@storybook/html-webpack5",
     options: {
-      builder: { useSWC: true },
+      builder: {
+        useSWC: true,
+        options: {
+          publicPath: '/storybook/',
+        },
+      },
       fastRefresh: false,
     },
   },

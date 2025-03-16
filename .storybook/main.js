@@ -2,7 +2,7 @@
 
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const sass = require('sass'); // Ensure you have 'sass' installed!
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 
 module.exports = {
   stories: ['../src/**/*.stories.js'],
@@ -21,26 +21,31 @@ module.exports = {
     }
   },
   webpackFinal: async (config) => {
-    // Copy USWDS fonts, images, and JS to /public/uswds/
+    // Copy & hash fonts, images, JS
     config.plugins.push(
       new CopyWebpackPlugin({
         patterns: [
-          // Copy fonts
           {
             from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/fonts'),
-            to: path.resolve(__dirname, '../public/uswds/fonts'),
+            to: 'uswds/fonts/[name].[contenthash][ext]',
           },
-          // Copy images
           {
             from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/img'),
-            to: path.resolve(__dirname, '../public/uswds/img'),
+            to: 'uswds/img/[name].[contenthash][ext]',
           },
-          // Copy JS (uswds-init.min.js)
           {
             from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/js/uswds-init.min.js'),
-            to: path.resolve(__dirname, '../public/uswds/js/uswds-init.min.js'),
+            to: 'uswds/js/uswds-init.[contenthash].min.js',
           },
         ],
+      })
+    );
+
+    // Add manifest plugin to map hashed filenames
+    config.plugins.push(
+      new WebpackManifestPlugin({
+        fileName: 'asset-manifest.json',
+        publicPath: '', // Keep relative paths
       })
     );
 

@@ -9,7 +9,7 @@ export default {
   title: 'Components/Accordion',
 };
 
-const Default = {
+const baseStory = {
   render: args => accordionTwig(args),
   args: { ...data },
   play: async () => {
@@ -17,12 +17,14 @@ const Default = {
   },
 };
 
-export const Accordion = {
-  ...Default,
+// Export story as Default
+export const Default = {
+  ...baseStory,
   args: { ...data },
 };
 
+// Other variants
 export const Bordered = {
-  ...Default,
+  ...baseStory,
   args: { ...borderedData },
 };

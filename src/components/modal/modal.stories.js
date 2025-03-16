@@ -9,7 +9,8 @@ export default {
   title: 'Components/Modal',
 };
 
-const Default = {
+// Shared base config
+const baseStory = {
   render: args => modalTwig(args),
   args: { ...data },
   play: async () => {
@@ -17,17 +18,19 @@ const Default = {
   },
 };
 
-export const Modal = {
-  ...Default,
+// Export Default as the primary story
+export const Default = {
+  ...baseStory,
   args: { ...data },
 };
 
+// Other variants
 export const Large = {
-  ...Default,
+  ...baseStory,
   args: { ...largeData },
 };
 
 export const ForcedAction = {
-  ...Default,
+  ...baseStory,
   args: { ...forcedActionData },
 };

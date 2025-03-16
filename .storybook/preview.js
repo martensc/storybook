@@ -2,13 +2,13 @@
 
 import '../assets/scss/styles.scss';
 
-// Inject uswds-init.min.js dynamically
+// Dynamically inject uswds-init.min.js served directly from node_modules
 if (typeof window !== 'undefined') {
   const existingScript = document.querySelector('script[data-uswds-init]');
   
   if (!existingScript) {
     const initScript = document.createElement('script');
-    initScript.src = '/uswds/js/uswds-init.min.js';
+    initScript.src = '/vendor/uswds/uswds-init.min.js';
     initScript.defer = true;
     initScript.dataset.uswdsInit = true; // Prevent duplicate injection
     document.head.appendChild(initScript);

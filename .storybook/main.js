@@ -20,16 +20,20 @@ module.exports = {
     }
   },
   webpackFinal: async (config) => {
-    config.plugins.push(
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/js'),
-            to: path.resolve(__dirname, '../public/uswds/js'),
+    // Add alias or copy rule to expose uswds-init.min.js
+    config.module.rules.push({
+      test: /uswds-init\.min\.js$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {
+            name: 'vendor/uswds/[name].[ext]', // Serve from /vendor/uswds/
           },
-        ],
-      })
-    );
+        },
+      ],
+      include: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/js'),
+    });
+
     return config;
   },
 };

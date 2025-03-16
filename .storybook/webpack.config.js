@@ -7,7 +7,10 @@ module.exports = ({ config }) => {
     test: /\.twig$/,
     use: [
       {
-        loader: 'twigjs-loader',
+        loader: 'twig-loader',
+        options: {
+          // No options needed unless adding custom filters/functions
+        },
       },
     ],
   });
@@ -36,7 +39,7 @@ module.exports = ({ config }) => {
       {
         loader: 'css-loader',
         options: {
-          url: false, // ✅ Prevent font/image URL resolution
+          url: false, // Prevent font/image URL resolution
         },
       },
       {
@@ -48,7 +51,7 @@ module.exports = ({ config }) => {
               path.resolve(__dirname, '../node_modules/@uswds/uswds/packages'),
               path.resolve(__dirname, '../src/scss'),
             ],
-            silenceDeprecations: ['mixed-decls'], // ✅ Suppress USWDS warnings
+            silenceDeprecations: ['mixed-decls'], // Suppress USWDS warnings
           },
         },
       },

@@ -28,8 +28,8 @@ module.exports = ({ config }) => {
   config.module.rules.push({
     test: /\.scss$/,
     include: [
-      path.resolve(__dirname, '../src/scss'),
       path.resolve(__dirname, '../src'),
+      path.resolve(__dirname, '../src/scss'),
     ],
     use: [
       'style-loader',
@@ -45,8 +45,8 @@ module.exports = ({ config }) => {
           implementation: sass,
           sassOptions: {
             loadPaths: [
-              path.resolve(__dirname, '../src/scss'),
               path.resolve(__dirname, '../node_modules/@uswds/uswds/packages'),
+              path.resolve(__dirname, '../src/scss'),
             ],
             silenceDeprecations: ['mixed-decls'], // ✅ Suppress USWDS warnings
           },

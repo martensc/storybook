@@ -36,6 +36,14 @@ const preview = {
         order: ['Elements', 'Components'],
       },
     },
+    // Add accessibility rules
+    a11y: {
+      // Disable or fine-tune specific rules if needed
+      config: {},
+      options: {
+        checks: { 'color-contrast': { options: { noScroll: true } } },
+      },
+    },
   },
 };
 

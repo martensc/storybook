@@ -9,6 +9,7 @@ export default {
   title: 'Components/Accordion',
 };
 
+// Shared base config
 const baseStory = {
   render: args => accordionTwig(args),
   args: { ...data },

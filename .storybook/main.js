@@ -2,64 +2,50 @@
 
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const StylelintPlugin = require('stylelint-webpack-plugin');
 const sass = require('sass-embedded');
 
 module.exports = {
-  // Where Storybook should find stories
   stories: ['../src/**/*.stories.js'],
 
-  // Essential addons
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
   ],
 
-  // Serve static assets
   staticDirs: ['../public'],
 
-  // Use HTML + Webpack5 builder with SWC for fast JS transpilation
   framework: {
     name: "@storybook/html-webpack5",
     options: {
       builder: { useSWC: true },
       fastRefresh: false,
-    }
+    },
   },
 
-  // Customize Webpack
   webpackFinal: async (config) => {
-    // ─── Copy USWDS Assets ────────────────────────────────
+    // ─── Copy USWDS Assets WITHOUT hashing ────────────────────────
     config.plugins.push(
       new CopyWebpackPlugin({
         patterns: [
           {
             from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/fonts'),
-            to: 'uswds/fonts/[name].[contenthash][ext]',
+            to: 'uswds/fonts/[name][ext]',
           },
           {
             from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/img'),
-            to: 'uswds/img/[name].[contenthash][ext]',
+            to: 'uswds/img/[name][ext]',
           },
           {
             from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/js/uswds-init.min.js'),
-            to: 'uswds/js/uswds-init.[contenthash].min.js',
+            to: 'uswds/js/uswds-init.min.js',
           },
         ],
       })
     );
 
-    // ─── Generate Asset Manifest ───────────────────────────
-    config.plugins.push(
-      new WebpackManifestPlugin({
-        fileName: 'asset-manifest.json',
-        publicPath: '', // Relative paths
-      })
-    );
-
-    // ─── Stylelint for SCSS ───────────────────────────────
+    // ─── Stylelint Plugin ──────────────────────────────────────────
     config.plugins.push(
       new StylelintPlugin({
         files: 'src/**/*.scss',
@@ -69,13 +55,13 @@ module.exports = {
       })
     );
 
-    // ─── Twig Loader ───────────────────────────────────────
+    // ─── Twig Loader ───────────────────────────────────────────────
     config.module.rules.push({
       test: /\.twig$/,
       use: 'twig-loader',
     });
 
-    // ─── SCSS Loader: USWDS + Custom SCSS ───────────────────
+    // ─── SCSS Loader ───────────────────────────────────────────────
     config.module.rules.push({
       test: /\.scss$/,
       include: [
@@ -87,7 +73,7 @@ module.exports = {
         {
           loader: 'css-loader',
           options: {
-            url: false, // Prevent resolving image/font URLs
+            url: false,
           },
         },
         {
@@ -106,14 +92,14 @@ module.exports = {
       ],
     });
 
-    // ─── YAML Loader ───────────────────────────────────────
+    // ─── YAML Loader ───────────────────────────────────────────────
     config.module.rules.push({
       test: /\.yml$/,
       use: 'yaml-loader',
       include: path.resolve(__dirname, '../'),
     });
 
-    // ─── Resolve SCSS & Twig Shortcuts ─────────────────────
+    // ─── Resolve Extensions ────────────────────────────────────────
     config.resolve.extensions.push('.twig');
     config.resolve.modules = [
       path.resolve(__dirname, '../src/scss'),

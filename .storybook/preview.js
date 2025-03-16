@@ -8,7 +8,7 @@ if (typeof window !== 'undefined') {
   
   if (!existingScript) {
     const initScript = document.createElement('script');
-    initScript.src = '/vendor/uswds/uswds-init.min.js';
+    initScript.src = 'uswds/js/uswds-init.min.js';
     initScript.defer = true;
     initScript.dataset.uswdsInit = true; // Prevent duplicate injection
     document.head.appendChild(initScript);

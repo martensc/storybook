@@ -2,10 +2,12 @@
   "name": "storybook",
   "version": "1.0.0",
   "main": "index.js",
+  "homepage": "https://carlmartens.github.io/storybook/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "deploy-storybook": "npm run build-storybook && echo > storybook-static/.nojekyll && gh-pages -d storybook-static"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +30,7 @@
     "babel-loader": "^10.0.0",
     "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^7.1.2",
+    "gh-pages": "^6.3.0",
     "sass": "^1.85.1",
     "sass-embedded": "^1.85.1",
     "sass-loader": "^16.0.5",

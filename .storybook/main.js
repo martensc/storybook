@@ -21,7 +21,7 @@ module.exports = {
     }
   },
   webpackFinal: async (config) => {
-    // ✅ Copy USWDS fonts & images to /public/uswds/
+    // Copy USWDS fonts, images, and JS to /public/uswds/
     config.plugins.push(
       new CopyWebpackPlugin({
         patterns: [
@@ -35,23 +35,14 @@ module.exports = {
             from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/img'),
             to: path.resolve(__dirname, '../public/uswds/img'),
           },
+          // Copy JS (uswds-init.min.js)
+          {
+            from: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/js/uswds-init.min.js'),
+            to: path.resolve(__dirname, '../public/uswds/js/uswds-init.min.js'),
+          },
         ],
       })
     );
-
-    // ✅ Rule to expose uswds-init.min.js via file-loader
-    config.module.rules.push({
-      test: /uswds-init\.min\.js$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {
-            name: 'vendor/uswds/[name].[ext]',
-          },
-        },
-      ],
-      include: path.resolve(__dirname, '../node_modules/@uswds/uswds/dist/js'),
-    });
 
     return config;
   },

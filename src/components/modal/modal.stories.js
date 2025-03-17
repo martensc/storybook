@@ -13,23 +13,28 @@ export default {
 const baseStory = {
   render: args => modalTwig(args),
   args: { ...data },
-  play: async () => {
-    initUswdsComponent(uswdsModal);
+
+  play: async ({ canvasElement }) => {
+    const modalTrigger = canvasElement.querySelector('[data-open-modal]');
+    if (modalTrigger) {
+      initUswdsComponent(uswdsModal, canvasElement);
+    }
   },
 };
 
-// Export Default as the primary story
+// Default modal
 export const Default = {
   ...baseStory,
   args: { ...data },
 };
 
-// Other variants
+// Large variant
 export const Large = {
   ...baseStory,
   args: { ...largeData },
 };
 
+// Forced action variant
 export const ForcedAction = {
   ...baseStory,
   args: { ...forcedActionData },

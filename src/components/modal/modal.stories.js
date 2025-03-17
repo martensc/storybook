@@ -1,34 +1,36 @@
-import accordionTwig from './modal.twig';
+import modalTwig from './modal.twig';
 import data from './modal.yml';
-import focedActiondData from './modal~forced-action.yml';
+import forcedActionData from './modal~forced-action.yml';
 import largeData from './modal~large.yml';
+import uswdsModal from '@uswds/uswds/js/usa-modal';
+import { initUswdsComponent } from '../../utils/uswds-init';
 
 export default {
   title: 'Components/Modal',
 };
 
-const Default = {
-  render: args => accordionTwig(args),
+// Shared base config
+const baseStory = {
+  render: args => modalTwig(args),
+  args: { ...data },
+  play: async () => {
+    initUswdsComponent(uswdsModal);
+  },
+};
+
+// Export Default as the primary story
+export const Default = {
+  ...baseStory,
   args: { ...data },
 };
 
-export const Modal = {
-  ...Default,
-  args: {
-    ...data,
-  },
+// Other variants
+export const Large = {
+  ...baseStory,
+  args: { ...largeData },
 };
 
 export const ForcedAction = {
-  ...Default,
-  args: {
-    ...focedActiondData,
-  },
-};
-
-export const Large = {
-  ...Default,
-  args: {
-    ...largeData,
-  },
+  ...baseStory,
+  args: { ...forcedActionData },
 };

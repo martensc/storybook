@@ -2,26 +2,30 @@ import accordionTwig from './accordion.twig';
 import data from './accordion.yml';
 import borderedData from './accordion~bordered.yml';
 import './accordion.js';
+import uswdsAccordion from '@uswds/uswds/js/usa-accordion';
+import { initUswdsComponent } from '../../utils/uswds-init';
 
 export default {
   title: 'Components/Accordion',
 };
 
-const Default = {
+// Shared base config
+const baseStory = {
   render: args => accordionTwig(args),
+  args: { ...data },
+  play: async () => {
+    initUswdsComponent(uswdsAccordion);
+  },
+};
+
+// Export story as Default
+export const Default = {
+  ...baseStory,
   args: { ...data },
 };
 
-export const Accordion = {
-  ...Default,
-  args: {
-    ...data,
-  },
-};
-
+// Other variants
 export const Bordered = {
-  ...Default,
-  args: {
-    ...borderedData,
-  },
+  ...baseStory,
+  args: { ...borderedData },
 };
